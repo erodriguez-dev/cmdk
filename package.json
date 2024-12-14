@@ -1,6 +1,19 @@
 {
   "name": "cmdk-root",
   "private": true,
+  "main": "dist/index.js",              
+  "module": "dist/index.esm.js", 
+  "types": "dist/index.d.ts", 
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "pnpm -F cmdk build",
     "dev": "pnpm -F cmdk build --watch",
@@ -9,7 +22,8 @@
     "format": "prettier '**/*.{js,jsx,ts,tsx,json,md,mdx,css,scss,yaml,yml}' --write",
     "preinstall": "npx only-allow pnpm",
     "test:format": "prettier '**/*.{js,jsx,ts,tsx,json,md,mdx,css,scss,yaml,yml}' --check",
-    "test": "playwright test"
+    "test": "playwright test",
+    "prepare": "pnpm build"    
   },
   "devDependencies": {
     "@playwright/test": "1.41.1",
