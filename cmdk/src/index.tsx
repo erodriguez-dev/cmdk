@@ -951,6 +951,9 @@ export { Dialog as CommandDialog }
 export { Empty as CommandEmpty }
 export { Loading as CommandLoading }
 
+// Exporta el contexto StoreContext para ser usado externamente
+export { StoreContext };
+
 /**
  *
  *
