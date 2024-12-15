@@ -2,7 +2,62 @@
 <img src="./website/public/og.png" />
 </p>
 
-# ⌘K [![cmdk minzip package size](https://img.shields.io/bundlephobia/minzip/cmdk)](https://www.npmjs.com/package/cmdk?activeTab=code) [![cmdk package version](https://img.shields.io/npm/v/cmdk.svg?colorB=green)](https://www.npmjs.com/package/cmdk)
+# cmdk Fork by [erodriguez-dev](https://github.com/erodriguez-dev)
+
+This is a fork of [cmdk](https://github.com/pacocoursey/cmdk), a command menu component for React. This fork introduces a minor but impactful change:
+
+- **Exports the `StoreContext`**, enabling customization of components like `CommandInput`. For example, you can now replace it with a `textarea` or other input elements while maintaining synchronization with the internal state.
+
+---
+
+## Example: Using `StoreContext` for Custom Input Components
+
+The following example demonstrates how to use `StoreContext` to customize the input component with a `textarea`:
+
+```tsx
+import React from "react";
+import { StoreContext } from "@gocodeart/cmdk";
+
+const CommandTextArea = ({ onValueChange, ...props }) => {
+    const useStore = () => React.useContext(StoreContext);
+    const store = useStore();
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        store.setState("search", value); // Updates the internal cmdk state
+
+        if (onValueChange) {
+            onValueChange(value);
+        }
+    };
+
+    return (
+        <textarea
+            {...props}
+            onChange={handleChange}
+            rows={1}
+            style={{ resize: "none", overflow: "hidden" }}
+        />
+    );
+};
+```
+
+## Using this Fork as a Drop-in Replacement for the Original Package
+
+If you'd like to use this fork (`@gocodeart/cmdk`) as a replacement for the original package (`cmdk`) without modifying your code, you can use the `overrides` feature in **npm** or **pnpm** by adding the following to your `package.json`:
+
+### Example with `pnpm` or `npm` (in `package.json`):
+
+```json
+{
+  "overrides": {
+    "cmdk": "@gocodeart/cmdk"
+  }
+};
+```
+
+# ⌘K [![cmdk minzip package size](https://img.shields.io/bundlephobia/minzip/@gocodeart/cmdk)](https://www.npmjs.com/package/@gocodeart/cmdk)  
+[![cmdk package version](https://img.shields.io/npm/v/@gocodeart/cmdk.svg?colorB=green)](https://www.npmjs.com/package/@gocodeart/cmdk)
 
 ⌘K is a command menu React component that can also be used as an accessible combobox. You render items, it filters and sorts them automatically. ⌘K supports a fully composable API <sup><sup>[How?](/ARCHITECTURE.md)</sup></sup>, so you can wrap items in other components or even as static JSX.
 
